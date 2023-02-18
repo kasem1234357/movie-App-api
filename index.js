@@ -6,7 +6,7 @@ const cors = require( 'cors' );
 const userRoute = require("./routes/users");
 const authRoute = require("./routes/auth");
 dotenv.config();
-mongoose.set('strictQuery', true);
+
 mongoose.connect(
   process.env.MONGO_URL,
   { useNewUrlParser: true },
