@@ -33,14 +33,21 @@ router.put("/:userId/addMovie", async (req, res) => {
  });
  router.put("/:userId/deleteMovie", async (req, res) => {
   const userId = req.params.userId;
-  
+  const movieId =req.body.movieId
   try {
-    const movie = req.body;
+    
     const user = await User.findById(userId)
    if(!user){
     res.status(401).json("there no userId like this");
    }else{
-   await user.updateOne({ $pull: { favMovies: movie } });
+    let currentMovie = {}
+    for(let el of user.favMovies){
+      if(el.id === movieId){
+        currentMovie = el
+        break;
+      }
+    }
+   await user.updateOne({ $pull: { favMovies: currentMovie } });
     res.status(200).json("done");
    }
     
