@@ -7,7 +7,7 @@ const userRoute = require("./routes/users");
 const authRoute = require("./routes/auth");
 dotenv.config();
 const corsOptions = {
-  origin: 'https://midnightx.vercel.app/', // Specify the allowed origin(s) here
+  origin: '*', // Specify the allowed origin(s) here
   methods: 'GET,HEAD,OPTIONS,POST,PUT,DELETE',
   allowedHeaders: 'Origin, Content-Type, X-Requested-With, Accept, Authorization',
 };
