@@ -11,10 +11,10 @@ router.post("/register", async (req, res) => {
  try {
    //generate new password
    if(checkEmail ){
-    res.status(401).json("email is taken")
+    res.status(401).send({msg:"email is taken"})
    }
    else if(checkName){
-    res.status(402).json("name is taken")
+    res.status(402).send({msg:"name is taken"})
    }
    else{
      
