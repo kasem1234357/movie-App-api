@@ -1,4 +1,7 @@
 const mongoose = require('mongoose');
+//privateMasseges:[{messagesId,state}],
+//globalMasseges:[{messagesId,state}],
+//reportMasseges:[{messagesId,state}]
 const UserSchema = new mongoose.Schema({
   userName: {
     type: String,
@@ -33,6 +36,21 @@ const UserSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  reportMasseges:{
+    type:[],
+    default: []
+  },
+  globalMessages: [
+    { MassegeId:{
+    type:mongoose.Schema.Types.ObjectId, ref: 'SysMassege' 
+  },isOpened:{
+    type:Boolean,
+    default:false
+  }}],
+  privateMasseges:{
+    type:[],
+    default: []
+  }
 },
 { timestamps: true })
 module.exports = mongoose.model("moviesUsers", UserSchema);

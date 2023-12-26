@@ -6,6 +6,8 @@ const helmet = require('helmet');
 const cors = require( 'cors' );
 const userRoute = require("./routes/users");
 const authRoute = require("./routes/auth");
+const reportRoute =  require('./routes/reportMasseges')
+const sysRoute = require('./routes/systemMasseges');
 dotenv.config();
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
@@ -43,6 +45,8 @@ mongoose.connect(
 );
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
+app.use("/api/report", reportRoute);
+app.use("/api/sys", sysRoute);
 app.listen(8800, () => {
  console.log("Backend server is running!");
 });
