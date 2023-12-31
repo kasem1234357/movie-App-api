@@ -19,18 +19,7 @@ const corsOptions = {
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }))
 app.use(cors(corsOptions));
-// app.use(function(req,res,next){
-//    res.header('Access-Control-Allow-Origin',"*")
-//    res.header(
-//     'Access-Control-Allow-Methods',
-//     "GET,HEAD,OPTIONS,POST,PUT,DELETE"
-//    );
-//    res.header(
-//     'Access-Control-Allow-Headers',
-//     'Origin, Content-Type, X-Requested-With, Accept, Authorization'
-//    );
-//    next();
-// })
+
 mongoose.set('strictQuery', false);
 mongoose.connect(
   process.env.MONGO_URL,
