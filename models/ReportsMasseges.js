@@ -1,9 +1,13 @@
 const mongoose = require("mongoose");
 const ReportSchema = new mongoose.Schema(
   {
-    type: {
-      type: String,
+    problemType: {
+      type: [],
       require: true,
+    },
+    type:{
+      type:String,
+      require:true
     },
     userId: {
       type: String,
