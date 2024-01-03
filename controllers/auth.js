@@ -61,26 +61,36 @@ const getVerified = async(req,res)=>{
   const userId = req.params.userId;
   try {
      if(!userId){
+      console.log(64);
       return handleError(res, 401, "UserId not found")
      }else{
+      console.log(67);
       const user = await User.findById(userId)
       if(!user){
+        console.log(70);
         return handleError(res, 403, "User not found")
       }
        const currentToken = await Token.findOne({userID:userId})
+       console.log(74);
+       console.log(currentToken);
        if(currentToken){
+        console.log(76);
          await Token.findOneAndDelete({userID:userId})
+         console.log(79);
        }
        const token = new Token({
         userID:userId,
         token:randomize(6)
        })
+       console.log(75);
        const newToken = await token.save()
+       console.log(87);
        sendToEmail(user.userName,user.email,GET_VERIFIED_EMAIL_MASSEGE(newToken.token))
-       
+       console.log(89);
+       res.status(200).json({ success: true, message: 'code for verified send successfully!' });
      }
   } catch (error) {
-    return handleError(res, 500, "some thing going wrong")
+    return handleError(res, 500, error)
   }
 
 }
