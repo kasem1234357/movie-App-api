@@ -67,7 +67,10 @@ const getVerified = async(req,res)=>{
       if(!user){
         return handleError(res, 403, "User not found")
       }
-       await Token.findOneAndDelete({userID:userId})
+       const currentToken = await Token.findOne({userID:userId})
+       if(currentToken){
+         await Token.findOneAndDelete({userID:userId})
+       }
        const token = new Token({
         userID:userId,
         token:randomize(6)
