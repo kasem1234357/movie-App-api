@@ -42,7 +42,7 @@ const UserSchema = new mongoose.Schema({
   },
   globalMessages: [
     { MassegeId:{
-    type:mongoose.Schema.Types.ObjectId, ref: 'SysMassege' 
+    type:mongoose.Schema.Types.ObjectId, ref: 'SystemMasseges' 
   },isOpened:{
     type:Boolean,
     default:false
@@ -50,6 +50,10 @@ const UserSchema = new mongoose.Schema({
   privateMasseges:{
     type:[],
     default: []
+  },
+  verified:{
+    type:Boolean,
+    default:false
   }
 },
 { timestamps: true })

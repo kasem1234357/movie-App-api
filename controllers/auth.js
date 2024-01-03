@@ -1,7 +1,13 @@
+import Token from "../models/token";
+import { GET_VERIFIED_EMAIL_MASSEGE} from "../utils/CONSTANTS";
+import { checkVerified } from "../utils/checkVerifiedFn";
 import { handleError } from "../utils/errorHandeler";
+import { randomize } from "../utils/randomizeFn";
+import { sendToEmail } from "../utils/sendToEmail";
 
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
+
 
 export const createUser = async (req, res) => {
   // توليد ملح لتحسين أمان التشفير
@@ -53,3 +59,48 @@ export const logUser = async (req, res) => {
     return handleError(res, 404, "no user exists in db to update");
   }
 };
+export const getVerified = async(req,res)=>{
+  const userId = req.params.userId;
+  try {
+     if(!userId){
+      return handleError(res, 401, "UserId not found")
+     }else{
+      const user = await User.findById(userId)
+      if(!user){
+        return handleError(res, 403, "User not found")
+      }
+       await Token.findOneAndDelete({userID:userId})
+       const token = new Token({
+        userID:userId,
+        token:randomize(6)
+       })
+       const newToken = await token.save()
+       sendToEmail(user.userName,user.email,GET_VERIFIED_EMAIL_MASSEGE(newToken.token))
+       
+     }
+  } catch (error) {
+    return handleError(res, 500, "some thing going wrong")
+  }
+
+}
+export const setVerified = async(req,res)=>{
+  const { userId,code } = req.body;
+  try {
+    if(!userId){
+      return handleError(res, 401, "User not found")
+     }else{
+      const user = await User.findById(userId)
+      if(!user){
+        return handleError(res, 403, "User not found")
+      }
+      const token = await Token.findOne({userID:userId});
+      if(!token){
+        return handleError(res, 403, "no token found ")
+      }else{
+        checkVerified(code,token.token,user)
+      }
+     }
+  } catch (error) {
+    return handleError(res, 500, "some thing going wrong ")
+  }
+}

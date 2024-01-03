@@ -3,3 +3,9 @@ export const REPORT_STATES = {
     IN_PROGRESS: 2,
     FIXED: 3,
   };
+export const GET_VERIFIED_EMAIL_MASSEGE = (code)=>{
+   return `the code for verfication is \n ${code}`
+}
+export const SET_VERIFIED_EMAIL_MASSEGE =()=>{
+  return `you are verified now `
+}
