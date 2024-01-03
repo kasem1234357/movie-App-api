@@ -2,7 +2,7 @@ const{ SET_VERIFIED_EMAIL_MASSEGE } = require('./CONSTANTS')
 const  handleError =require("./errorHandeler");
 const sendToEmail = require("./sendToEmail");
 
-export const checkVerified = async(res,code,token,user)=>{
+const checkVerified = async(res,code,token,user)=>{
     try {
       if(code === token ){
         await user.updateOne({ $set: { verified: true } })
