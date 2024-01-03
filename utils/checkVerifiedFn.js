@@ -1,6 +1,6 @@
-import { SET_VERIFIED_EMAIL_MASSEGE } from "./CONSTANTS";
-import { handleError } from "./errorHandeler";
-import { sendToEmail } from "./sendToEmail";
+const{ SET_VERIFIED_EMAIL_MASSEGE } = require('./CONSTANTS')
+const  handleError =require("./errorHandeler");
+const sendToEmail = require("./sendToEmail");
 
 export const checkVerified = async(res,code,token,user)=>{
     try {
@@ -16,3 +16,4 @@ export const checkVerified = async(res,code,token,user)=>{
     }
   
   }
+module.exports = checkVerified

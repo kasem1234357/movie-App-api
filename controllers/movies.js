@@ -1,7 +1,6 @@
-import { handleError } from "../utils/errorHandeler";
-
+const handleError = require('../utils/errorHandeler')
 const User = require("../models/User");
-export const addMovie = async (req, res) => {
+const addMovie = async (req, res) => {
   const userId = req.params.userId;
   const movie = req.body.data;
   try {
@@ -16,7 +15,7 @@ export const addMovie = async (req, res) => {
     return handleError(res, 500, err.message);
   }
 };
-export const deleteMovie = async (req, res) => {
+const deleteMovie = async (req, res) => {
   const userId = req.params.userId;
   const movieId = req.body.movieId;
   try {
@@ -38,3 +37,7 @@ export const deleteMovie = async (req, res) => {
     return handleError(res, 500, err.message);
   }
 };
+module.exports ={
+  addMovie,
+ deleteMovie
+}

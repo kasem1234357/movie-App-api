@@ -1,15 +1,13 @@
-import Token from "../models/token";
-import { GET_VERIFIED_EMAIL_MASSEGE} from "../utils/CONSTANTS";
-import { checkVerified } from "../utils/checkVerifiedFn";
-import { handleError } from "../utils/errorHandeler";
-import { randomize } from "../utils/randomizeFn";
-import { sendToEmail } from "../utils/sendToEmail";
-
+const Token = require('../models/token')
+const sendToEmail = require('../utils/sendToEmail')
+const randomize = require('../utils/randomizeFn')
+const checkVerified = require('../utils/checkVerifiedFn')
+const {GET_VERIFIED_EMAIL_MASSEGE} = require('../utils/CONSTANTS')
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
+const handleError = require('../utils/errorHandeler')
 
-
-export const createUser = async (req, res) => {
+const createUser = async (req, res) => {
   // توليد ملح لتحسين أمان التشفير
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(req.body.password, salt);
@@ -38,7 +36,7 @@ export const createUser = async (req, res) => {
     return handleError(res, 500, "error");
   }
 };
-export const logUser = async (req, res) => {
+const logUser = async (req, res) => {
   try {
     // البحث عن المستخدم باستخدام عنوان البريد الإلكتروني
     const user = await User.findOne({ email: req.body.email });
@@ -59,7 +57,7 @@ export const logUser = async (req, res) => {
     return handleError(res, 404, "no user exists in db to update");
   }
 };
-export const getVerified = async(req,res)=>{
+const getVerified = async(req,res)=>{
   const userId = req.params.userId;
   try {
      if(!userId){
@@ -83,7 +81,7 @@ export const getVerified = async(req,res)=>{
   }
 
 }
-export const setVerified = async(req,res)=>{
+const setVerified = async(req,res)=>{
   const { userId,code } = req.body;
   try {
     if(!userId){
@@ -103,4 +101,7 @@ export const setVerified = async(req,res)=>{
   } catch (error) {
     return handleError(res, 500, "some thing going wrong ")
   }
+}
+module.exports = {
+  createUser,logUser,getVerified,setVerified
 }

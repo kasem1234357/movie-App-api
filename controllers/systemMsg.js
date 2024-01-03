@@ -1,7 +1,7 @@
-import { handleError } from "../utils/errorHandeler";
+const handleError = require('../utils/errorHandeler')
 const SysMassege = require("../models/SystemMasseges");
 const User = require("../models/User");
-export const addPriveteMsg = async (req, res) => {
+const addPriveteMsg = async (req, res) => {
   try {
     // Destructure request body
     const { userId, type, textArea, title, createdAt, isPrivate } = req.body;
@@ -41,7 +41,7 @@ export const addPriveteMsg = async (req, res) => {
     handleError(res, 500, error.message);
   }
 };
-export const addGlobalMsg = async (req, res) => {
+const addGlobalMsg = async (req, res) => {
   try {
     // Destructure request body
     const { type, textArea, title, createdAt, isPrivate } = req.body;
@@ -77,3 +77,7 @@ export const addGlobalMsg = async (req, res) => {
     handleError(res, 500, error.message);
   }
 };
+module.exports = {
+  addGlobalMsg,
+  addPriveteMsg
+}

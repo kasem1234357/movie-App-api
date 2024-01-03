@@ -1,4 +1,4 @@
-export const sendToEmail= (name,email,message)=>{
+const sendToEmail= (name,email,message)=>{
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -23,3 +23,4 @@ export const sendToEmail= (name,email,message)=>{
       });
     
 }
+module.exports = sendToEmail

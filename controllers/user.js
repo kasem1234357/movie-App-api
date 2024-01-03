@@ -1,7 +1,7 @@
-import { handleError } from "../utils/errorHandeler";
+const handleError = require('../utils/errorHandeler')
 
 const User = require("../models/User");
-export const getUserByID = async (req, res) => {
+const getUserByID = async (req, res) => {
   const userId = req.params.userId;
   const userName = req.query.userName;
   try {
@@ -14,3 +14,6 @@ export const getUserByID = async (req, res) => {
     return handleError(res, 401, `User not found ${err.message}`);
   }
 };
+module.exports = {
+  getUserByID
+}

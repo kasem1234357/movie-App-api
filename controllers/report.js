@@ -1,8 +1,8 @@
-import { REPORT_STATES } from "../utils/CONSTANTS";
-import { handleError } from "../utils/errorHandeler";
+const {REPORT_STATES} = require('../utils/CONSTANTS')
+const handleError = require('../utils/errorHandeler')
 const Reports = require("../models/ReportsMasseges");
 const User = require("../models/User");
-export const addReport = async (req, res) => {
+ const addReport = async (req, res) => {
   try {
     // Destructure request body
     const { userId, ...reportData } = req.body;
@@ -36,3 +36,6 @@ export const addReport = async (req, res) => {
     handleError(res, 500, error.message);
   }
 };
+module.exports = {
+  addReport
+}
