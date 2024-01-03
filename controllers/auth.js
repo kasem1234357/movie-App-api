@@ -108,7 +108,7 @@ const setVerified = async(req,res)=>{
       if(!token){
         return handleError(res, 403, "no token found ")
       }else{
-        checkVerified(code,token.token,user)
+        checkVerified(res,code,token.token,user)
       }
      }
   } catch (error) {
