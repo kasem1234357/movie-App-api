@@ -5,6 +5,7 @@ const checkVerified = require('../utils/checkVerifiedFn')
 const {GET_VERIFIED_EMAIL_MASSEGE} = require('../utils/CONSTANTS')
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
+const jwt = require('jsonwebtoken');
 const handleError = require('../utils/errorHandeler')
 
 const createUser = async (req, res) => {
@@ -30,7 +31,15 @@ const createUser = async (req, res) => {
         password: hashedPassword,
       });
       const user = await newUser.save();
-      res.status(200).json(user);
+      const secretKey = process.env.TOKEN_SECRET_KEY; 
+      const { password,reportMasseges,privateMasseges,globalMessages,...userData} = user._doc 
+      const reqData = {
+        ...userData,
+        globalMessagesLength:globalMessages.filter(msg => !msg.isOpened).length,
+        privateMessagesLength:privateMasseges.filter(msg => !msg.isOpened).length
+      }
+      const token = jwt.sign(reqData, secretKey, { expiresIn: '30d' });
+      res.status(200).json(token);
     }
   } catch (err) {
     return handleError(res, 500, "error");
@@ -51,7 +60,15 @@ const logUser = async (req, res) => {
     } else if (!validPassword || validPassword === undefined) {
       return handleError(res, 403, "Wrong password");
     } else {
-      res.status(200).json(user);
+      const secretKey = process.env.TOKEN_SECRET_KEY; // قم بتوليد مفتاح سري آمن
+      const { password,reportMasseges,privateMasseges,globalMessages,...userData} = user._doc 
+      const reqData = {
+        ...userData,
+        globalMessagesLength:globalMessages.filter(msg => !msg.isOpened).length,
+        privateMessagesLength:privateMasseges.filter(msg => !msg.isOpened).length
+      }
+      const token = jwt.sign(reqData, secretKey, { expiresIn: '30d' });
+      res.status(200).json(token);
     }
   } catch (err) {
     return handleError(res, 404, "no user exists in db to update");

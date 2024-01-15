@@ -20,6 +20,7 @@
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "helmet": "^7.0.0",
+    "jsonwebtoken": "^9.0.2",
     "mongoose": "^6.2.9",
     "nodemailer": "^6.9.8",
     "nodemon": "^2.0.15"
