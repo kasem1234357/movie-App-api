@@ -11,7 +11,7 @@ const checkLink = async(req,res)=>{
     try {
         const movie =await Movies.findOne({year:year,month:month})
         if(movie.ranges[range][name]){
-            res.status(200).json({data:movie.ranges[range][name]})
+            res.status(200).json(movie.ranges[range][name])
         }else{
             res.status(404).json('error') 
         }
