@@ -9,6 +9,7 @@ const authRoute = require("./routes/auth");
 const reportRoute =  require('./routes/reportMasseges')
 const sysRoute = require('./routes/systemMasseges');
 const seoRoute = require('./routes/seo');
+const moviesRoute = require('./routes/movies')
 dotenv.config();
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
@@ -39,6 +40,7 @@ app.use("/api/users", userRoute);
 app.use("/api/report", reportRoute);
 app.use("/api/sys", sysRoute);
 app.use('/api/seo',seoRoute)
+app.use('/api/movies',moviesRoute)
 app.listen(8800, () => {
  console.log("Backend server is running!");
  
