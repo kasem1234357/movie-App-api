@@ -8,7 +8,7 @@ const User = require("../models/User");
     const { userId, ...reportData } = req.body;
 
     // Create a new Reports instance
-    const newReport = new Reports(reportData);
+    const newReport = new Reports(req.body);
 
     // Save the new report
     const report = await newReport.save();
@@ -36,6 +36,15 @@ const User = require("../models/User");
     handleError(res, 500, error.message);
   }
 };
+const getReports = async(req,res)=>{
+  try {
+     const reports = await Reports.find()
+     res.status(200).json(reports)
+  } catch (error) {
+    
+  }
+}
 module.exports = {
-  addReport
+  addReport,
+  getReports
 }

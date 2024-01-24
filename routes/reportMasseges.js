@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { addReport } = require("../controllers/report");
+const { addReport, getReports } = require("../controllers/report");
 
 // Report states
 
@@ -7,5 +7,6 @@ const { addReport } = require("../controllers/report");
 
 
 router.post('/',addReport );
+router.get('/',getReports);
 
 module.exports = router;
