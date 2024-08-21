@@ -12,7 +12,7 @@ const reportRoute =  require('./routes/reportMasseges')
 const sysRoute = require('./routes/systemMasseges');
 const seoRoute = require('./routes/seo');
 const moviesRoute = require('./routes/movies')
-
+const aiRoute = require('./routes/aiRouter')
 dotenv.config();
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
@@ -44,6 +44,7 @@ app.use("/api/report", reportRoute);
 app.use("/api/sys", sysRoute);
 app.use('/api/seo',seoRoute)
 app.use('/api/movies',moviesRoute)
+app.use('/api/ai',aiRoute)
 app.get('/api/test',(req,res)=>{
   res.status(200).json('server is active')
 })
