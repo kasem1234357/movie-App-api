@@ -16,8 +16,9 @@ router.post('/',async(req,res)=>{
         genre
         }]
         1- don't use any special letter beacuse that's give me error
-        1- dont send json format send as js array have multible objects 
-        2- dont change the sentence "name=movie" in the link attribute`
+        2- i convert object text to js by eval function so don't write anything can make errors
+        3- dont send json format send as js array have multible objects 
+        4- dont change the sentence "name=movie" in the link attribute`
         
       });
       if(response){
