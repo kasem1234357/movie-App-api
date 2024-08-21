@@ -4,12 +4,15 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const helmet = require('helmet');
 const cors = require( 'cors' );
+const cron = require('node-cron');
+const axios = require('axios');
 const userRoute = require("./routes/users");
 const authRoute = require("./routes/auth");
 const reportRoute =  require('./routes/reportMasseges')
 const sysRoute = require('./routes/systemMasseges');
 const seoRoute = require('./routes/seo');
 const moviesRoute = require('./routes/movies')
+
 dotenv.config();
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
@@ -41,6 +44,14 @@ app.use("/api/report", reportRoute);
 app.use("/api/sys", sysRoute);
 app.use('/api/seo',seoRoute)
 app.use('/api/movies',moviesRoute)
+cron.schedule('*/5 * * * *', async () => {
+  try {
+    const response = await axios.get('https://wolfxmovie2.onrender.com/api/test');
+    console.log(`Health check response: ${response.status}`);
+  } catch (error) {
+    console.error(`Health check error: ${error.message}`);
+  }
+});
 app.listen(8800, () => {
  console.log("Backend server is running!");
  
