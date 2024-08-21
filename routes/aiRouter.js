@@ -15,9 +15,8 @@ router.post('/',async(req,res)=>{
         description,
         genre
         }]
-        1- get all  information from The Movie Database (TMDB) website
-        2- dont send json format send as js array have multible objects 
-        3- dont change the sentence "name=movie" in the link attribute`
+        1- dont send json format send as js array have multible objects 
+        2- dont change the sentence "name=movie" in the link attribute`
         
       });
       if(response){
