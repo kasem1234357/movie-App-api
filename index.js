@@ -44,6 +44,9 @@ app.use("/api/report", reportRoute);
 app.use("/api/sys", sysRoute);
 app.use('/api/seo',seoRoute)
 app.use('/api/movies',moviesRoute)
+app.get('/api/test',(req,res)=>{
+  res.status(200).json('server is active')
+})
 cron.schedule('*/5 * * * *', async () => {
   try {
     const response = await axios.get('https://wolfxmovie2.onrender.com/api/test');
