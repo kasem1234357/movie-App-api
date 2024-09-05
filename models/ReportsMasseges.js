@@ -13,6 +13,10 @@ const ReportSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    year:{
+      type: Number,
+      required: true,
+    },
     showName: {
       type: String,
       required: true,
