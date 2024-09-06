@@ -13,8 +13,8 @@ const ReportSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    year:{
-      type: Number,
+    date:{
+      type: String,
       required: true,
     },
     showName: {
