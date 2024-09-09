@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { addReport, getReports,removeReport } = require("../controllers/report");
+const { addReport, getReports,removeReport,updateReport } = require("../controllers/report");
 
 // Report states
 
