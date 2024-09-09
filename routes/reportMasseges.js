@@ -9,5 +9,6 @@ const { addReport, getReports,removeReport } = require("../controllers/report");
 router.post('/',addReport );
 router.get('/',getReports);
 router.delete('/:id',removeReport);
+router.put('/:id',updateReport);
 
 module.exports = router;
