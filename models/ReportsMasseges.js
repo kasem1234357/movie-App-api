@@ -31,8 +31,8 @@ const ReportSchema = new mongoose.Schema(
     },
     status:{
      type:String,
-      enum:["not readed","in progress","done"],
-      default:"not readed"
+      enum:["not_readed","in_progress","done"],
+      default:"not_readed"
     },
     createdAt: { type: Date, default: Date.now },
   },
