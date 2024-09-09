@@ -44,7 +44,16 @@ const getReports = async(req,res)=>{
     
   }
 }
+const removeReport = async(req,res)=>{
+  try {
+      await Reports.findByIdAndDelete(req.params.id)
+     res.status(200).json('delete done')
+  } catch (error) {
+    res.status(500).json('some thing going wrong')
+  }
+}
 module.exports = {
   addReport,
-  getReports
+  getReports,
+ removeReport
 }
