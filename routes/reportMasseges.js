@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { addReport, getReports } = require("../controllers/report");
+const { addReport, getReports,removeReport } = require("../controllers/report");
 
 // Report states
 
@@ -8,5 +8,6 @@ const { addReport, getReports } = require("../controllers/report");
 
 router.post('/',addReport );
 router.get('/',getReports);
+router.delete('/:id',removeReport);
 
 module.exports = router;
