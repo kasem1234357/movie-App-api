@@ -52,8 +52,18 @@ const removeReport = async(req,res)=>{
     res.status(500).json('some thing going wrong')
   }
 }
+const updateReport = async(req,res)=>{
+try {
+     await Reports.findByIdAndUpdate(req.params.id,{$set:req.body})
+     res.status(200).json('updated done')
+} catch  (error) {
+    res.status(500).json('some thing going wrong')
+  }
+
+}
 module.exports = {
   addReport,
   getReports,
- removeReport
+ removeReport,
+ updateReport
 }
