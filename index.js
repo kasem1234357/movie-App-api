@@ -48,7 +48,7 @@ app.use('/api/ai',aiRoute)
 app.get('/api/test',(req,res)=>{
   res.status(200).json('server is active')
 })
-cron.schedule('*/5 * * * *', async () => {
+cron.schedule('*/10 * * * *', async () => {
   try {
     const response = await axios.get('https://wolfxmovie2.onrender.com/api/test');
     console.log(`Health check response: ${response.status}`);
